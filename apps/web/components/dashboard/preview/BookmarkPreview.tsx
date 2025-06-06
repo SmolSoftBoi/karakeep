@@ -61,6 +61,30 @@ function CreationTime({ createdAt }: { createdAt: Date }) {
   );
 }
 
+export function ExternalLinks({ url }: { url: string }) {
+  const { t } = useTranslation();
+  return (
+    <>
+      <Link
+        href={url}
+        target="_blank"
+        className="flex items-center gap-2 text-gray-400"
+      >
+        <span>{t("preview.view_original")}</span>
+        <ExternalLink />
+      </Link>
+      <Link
+        href={`https://web.archive.org/web/${encodeURIComponent(url)}`}
+        target="_blank"
+        className="flex items-center gap-2 text-gray-400"
+      >
+        <span>{t("preview.view_archived")}</span>
+        <ExternalLink />
+      </Link>
+    </>
+  );
+}
+
 export default function BookmarkPreview({
   bookmarkId,
   initialData,
@@ -129,16 +153,7 @@ export default function BookmarkPreview({
             {title === undefined || title === "" ? "Untitled" : title}
           </p>
         </div>
-        {sourceUrl && (
-          <Link
-            href={sourceUrl}
-            target="_blank"
-            className="flex items-center gap-2 text-gray-400"
-          >
-            <span>{t("preview.view_original")}</span>
-            <ExternalLink />
-          </Link>
-        )}
+        {sourceUrl && <ExternalLinks url={sourceUrl} />}
         <Separator />
       </div>
       <CreationTime createdAt={bookmark.createdAt} />

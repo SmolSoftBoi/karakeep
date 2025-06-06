@@ -367,6 +367,7 @@
   },
   "preview": {
     "view_original": "View Original",
+    "view_archived": "View Archived",
     "cached_content": "Cached Content",
     "reader_view": "Reader View",
     "tabs": {
